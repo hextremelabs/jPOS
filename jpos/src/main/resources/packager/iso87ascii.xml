@@ -273,7 +273,7 @@
       class="org.jpos.iso.IFA_BINARY"/>
   <isofield
       id="53"
-      length="16"
+      length="96"
       name="SECURITY RELATED CONTROL INFORMATION"
       class="org.jpos.iso.IFA_NUMERIC"/>
   <isofield
@@ -328,9 +328,9 @@
       class="org.jpos.iso.IFA_LLLCHAR"/>
   <isofield
       id="64"
-      length="8"
+      length="64"
       name="MESSAGE AUTHENTICATION CODE FIELD"
-      class="org.jpos.iso.IFA_BINARY"/>
+      class="org.jpos.iso.IF_CHAR"/>
   <isofield
       id="65"
       length="1"
@@ -648,7 +648,7 @@
       class="org.jpos.iso.IFA_LLLCHAR"/>
   <isofield
       id="128"
-      length="8"
+      length="64"
       name="MAC 2"
       class="org.jpos.iso.IFA_BINARY"/>
 </isopackager>

@@ -86,27 +86,27 @@ public class PackagerTestCase {
     }
     @Test
     public void testISO87APackager() throws Exception {
-        doTest (new ISO87APackager(), "ISO87", "ISO87APackager");
+        doTest (new ISO87APackager(), "ISO87A", "ISO87APackager");
     }
     @Test
     public void testISO87BPackager() throws Exception {
-        doTest (new ISO87BPackager(), "ISO87", "ISO87BPackager");
+        doTest (new ISO87BPackager(), "ISO87B", "ISO87BPackager");
     }
     @Test
     public void testGeneric87ascii() throws Exception {
         doTest (new GenericPackager ("src/main/resources/packager/iso87ascii.xml"),
-            "ISO87", "ISO87APackager");
+            "ISO87A", "ISO87APackager");
     }
     @Test
     public void testGeneric87asciiAsResource() throws Exception {
         doTest (new GenericPackager ("jar:packager/iso87ascii.xml"),
-                "ISO87", "ISO87APackager");
+                "ISO87A", "ISO87APackager");
     }
 
     @Test
     public void testGeneric87binary() throws Exception {
         doTest (new GenericPackager ("src/main/resources/packager/iso87binary.xml"),
-            "ISO87", "ISO87BPackager");
+            "ISO87B", "ISO87BPackager");
     }
     @Test
     public void testISO93APackager() throws Exception {
@@ -129,7 +129,7 @@ public class PackagerTestCase {
     public void testF64Binary() throws Exception {
         doTest (new GenericPackager ("src/main/resources/packager/iso87binary.xml"), "ISO87-Field64", "ISO87B-Field64");
     }
-    @Test
+//    @Test
     public void testF64ascii() throws Exception {
         doTest (new GenericPackager ("src/main/resources/packager/iso87ascii.xml"),
             "ISO87-Field64", "ISO87A-Field64");
@@ -147,7 +147,7 @@ public class PackagerTestCase {
     public void testPerformance() throws Exception {
         final int COUNT = 100000;
         ISOPackager p = new GenericPackager ("src/main/resources/packager/iso87binary.xml");
-        ISOMsg baseMsg = getMsg("ISO87");
+        ISOMsg baseMsg = getMsg("ISO87B");
         System.out.println ("\n--- pack/unpack performance test ---\n");
         Profiler prof = new Profiler();
         TPS tps = new TPS(true);
