@@ -301,12 +301,20 @@ public class ChannelAdaptor
                     Object o = sp.in (in, delay);
                     if (o instanceof ISOMsg) {
                         final ISOMsg msg = (ISOMsg) o;
-                        final byte[] header = getMessageHeader(msg.pack());
-                        msg.setHeader(header);
 
-                        getPackager(msg).setHeaderLength(header.length);
-                        ((ASCIIChannel) channel).setLengthDigits(header.length);
-                        channel.send (msg.pack());
+                        if (channel instanceof ASCIIChannel) {
+                            final byte[] header = getMessageHeader(msg.pack());
+                            msg.setHeader(header);
+
+                            if (msg.getPackager() != null) {
+                                getPackager(msg).setHeaderLength(header.length);
+                            }
+
+                            ((ASCIIChannel) channel).setLengthDigits(header.length);
+                            channel.send (msg.pack(), msg.getPackager());
+                        } else {
+                            channel.send (msg);
+                        }
                         tx++;
                     }
                     else if (keepAlive && channel.isConnected() && channel instanceof BaseChannel) {
