@@ -8,7 +8,7 @@ then
    echo "Process $(cat jpos.pid) is running"
 else
   rm -f jpos.pid
-  exec java -server \
+  exec /Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home/bin/java -server \
     -Xmx1G \
     -Xloggc:log/gc.log \
     -Djava.net.preferIPv4Stack=true \
@@ -18,6 +18,6 @@ else
     -XX:+ParallelRefProcEnabled \
     -XX:ParallelGCThreads=2 \
     -XX:+TieredCompilation \
-    -jar @jarname@  --pid="jpos.pid" "$@"
+    -jar bin/jpos-2.1.4-4-bundle-full.jar  --pid="jpos.pid" "$@"
 fi
 
