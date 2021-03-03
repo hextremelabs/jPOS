@@ -93,8 +93,8 @@ public abstract class BaseChannel extends Observable
     private int maxPacketLength = 100000;
     private boolean keepAlive;
     private boolean expectKeepAlive;
-    private boolean soLingerOn = false;
-    private int soLingerSeconds = 0;
+    private boolean soLingerOn = true;
+    private int soLingerSeconds = 5;
     private Configuration cfg;
     protected boolean usable;
     protected boolean overrideHeader;
