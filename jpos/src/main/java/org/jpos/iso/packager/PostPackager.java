@@ -233,14 +233,20 @@ public class PostPackager extends ISOBasePackager {
                     new IF_CHAR     (253,  "PAYEE NAME AND ADDRESS"), 
                     new IFA_LLCHAR  (28,  "PAYER ACCOUNT INFORMATION"), 
                     new IFA_LLLLCHAR(8000,  "ICC DATA"),
-                    new IFA_LLLCHAR (99, "RESERVED PRIVATE USE"),
-                    new IFA_NUMERIC (1, "RESERVED PRIVATE USE"),
-                    new IFA_LLLCHAR (99, "RESERVED PRIVATE USE"),
-                    new IFA_LLLCHAR (99, "RESERVED PRIVATE USE"),
-                    new IFA_LLLCHAR (99, "RESERVED PRIVATE USE"),
-                    new IFA_LLLCHAR (99, "RESERVED PRIVATE USE"),
-                    new IFA_LLLCHAR (99, "RESERVED PRIVATE USE"),
-                    new IFA_NUMERIC  (4,  "ETT")
+                    new IFA_LLCHAR (12, "ORIGINAL NODE"),
+                    new IFA_NUMERIC (1, "CARD VERIFICATION RESULT"),
+                    new IFA_NUMERIC (4, "AMEX CARD IDENTIFIER"),
+                    new IFB_BINARY (40, "3D SECURE DATA"),
+                    new IFA_NUMERIC (1, "3D SECURE RESULT"),
+                    new IFA_LLCHAR (11, "ISSUER NETWORK ID"),
+                    new IFA_LLCHAR (33, "UCAF DATA"),
+                    new IFA_NUMERIC  (4,  "EXTENDED TRANSACTION TYPE"),
+                    new IFA_LLLCHAR (999, "RESERVED PRIVATE USE"),
+                    new IFA_LLLCHAR (999, "RESERVED PRIVATE USE"),
+                    new IFA_LLLCHAR (999, "RESERVED PRIVATE USE"),
+                    new IF_CHAR (4, "EXTENDED RESPONSE CODE"),
+                    new IFA_LLLCHAR (999, "RESERVED PRIVATE USE"),
+                    new IF_CHAR (2, "ORIGINAL RESPONSE CODE"),
                 };  
 
         protected PostPrivatePackager()
