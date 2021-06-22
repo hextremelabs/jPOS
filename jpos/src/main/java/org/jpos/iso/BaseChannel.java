@@ -780,7 +780,9 @@ public abstract class BaseChannel extends Observable
                 evt.addMessage (ISOUtil.hexdump (header));
             }
             if (b != null) {
-                evt.addMessage ("--- data ---");
+              evt.addMessage("--- HEX DUMP ---");
+              evt.addMessage (ISOUtil.hexString(b));
+              evt.addMessage("--- data ---");
                 evt.addMessage (ISOUtil.hexdump (b));
             }
             throw e;
