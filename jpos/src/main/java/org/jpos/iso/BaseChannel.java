@@ -31,19 +31,8 @@ import org.jpos.util.Logger;
 import org.jpos.util.NameRegistrar;
 
 import javax.net.ssl.SSLSocket;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.net.ConnectException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
+import java.io.*;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -636,40 +625,28 @@ public abstract class BaseChannel extends Observable
     /**
      * sends a byte[] over the TCP/IP session
      * @param b the byte array to be sent
-     * @param packager ISOPackager for unpacking ISOMessage
      * @exception IOException
      * @exception ISOException
      * @exception ISOFilter.VetoException;
      */
-    public void send (byte[] b, ISOPackager packager) throws IOException, ISOException {
-      LogEvent evt = new LogEvent(this, "send");
-      if (packager != null) {
-        ISOMsg msg = new ISOMsg();
-        msg.setPackager(packager);
-        msg.unpack(b);
-        msg.setDirection(ISOMsg.OUTGOING);
-        msg = applyOutgoingFilters (msg, evt);
-        evt.addMessage (msg);
-      }
-      try {
-        if (!isConnected())
-          throw new ISOException("unconnected ISOChannel");
-        synchronized (serverOutLock) {
-          serverOut.write(b);
-          serverOut.flush();
+    public void send (byte[] b) 
+        throws IOException, ISOException
+    {
+        LogEvent evt = new LogEvent (this, "send");
+        try {
+            if (!isConnected())
+                throw new ISOException ("unconnected ISOChannel");
+            synchronized (serverOutLock) {
+                serverOut.write(b);
+                serverOut.flush();
+            }
+            cnt[TX]++;
+            setChanged();
+        } catch (Exception e) {
+            evt.addMessage (e);
+          Logger.log (evt);
+            throw new ISOException ("unexpected exception", e);
         }
-        cnt[TX]++;
-        setChanged();
-      } catch (Exception e) {
-        evt.addMessage(e);
-        throw new ISOException("unexpected exception", e);
-      } finally {
-        Logger.log(evt);
-      }
-    }
-
-    public void send(byte[] b) throws IOException, ISOException {
-      send(b, null);
     }
     /**
      * Sends a high-level keep-alive message (zero length)

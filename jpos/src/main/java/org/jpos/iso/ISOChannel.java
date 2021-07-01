@@ -84,10 +84,6 @@ public interface ISOChannel extends ISOSource {
      * @exception IOException
      * @exception ISOException
      */
-    default void send(byte[] b, ISOPackager packager) throws IOException, ISOException {
-      throw new UnsupportedOperationException("Operation not implemented");
-    }
-
     void send(byte[] b) throws IOException, ISOException;
 
     /**
